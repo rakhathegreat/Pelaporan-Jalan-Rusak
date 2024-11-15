@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Contracts\Support\Htmlable;
+use Filament\Forms\Components\TextInput;
 
 class LaporanJalanResource extends Resource
 {
@@ -24,10 +25,10 @@ class LaporanJalanResource extends Resource
 
     protected static ?string $navigationLabel = 'Laporan';
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
+    // public static function canCreate(): bool
+    // {
+    //     return false;
+    // }
 
 
 
@@ -35,7 +36,27 @@ class LaporanJalanResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('Nama Jalan'),
+
+                TextInput::make('Kota'),
+
+                TextInput::make('Kelurahan'),
+
+                TextInput::make('Lingkungan'),
+
+                TextInput::make('Rt'),
+
+                TextInput::make('Rw'),
+
+                TextInput::make('Koordinat')
+                ->columnSpanFull(),
+
+                TextInput::make('Lebar Jalan'),
+
+                TextInput::make('Panjang Jalan'),
+
+                TextInput::make('Kondisi')
+                ->columnSpanFull(),
             ]);
     }
 
@@ -47,6 +68,7 @@ class LaporanJalanResource extends Resource
                 ->searchable()
                 ->toggleable(),
                 TextColumn::make('tanggal')
+                ->dateTime('d M Y')
                 ->sortable()
                 ->searchable()
                 ->toggleable(),
@@ -54,35 +76,7 @@ class LaporanJalanResource extends Resource
                 ->sortable()
                 ->searchable()
                 ->toggleable(),
-                TextColumn::make('kota')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('kelurahan')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('lingkungan')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('rt')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('rw')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
                 TextColumn::make('koordinat')
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('panjang_jalan')
-                ->sortable()
-                ->searchable()
-                ->toggleable(),
-                TextColumn::make('lebar_jalan')
-                ->sortable()
                 ->searchable()
                 ->toggleable(),
                 TextColumn::make('kondisi')
@@ -94,6 +88,7 @@ class LaporanJalanResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -112,11 +107,12 @@ class LaporanJalanResource extends Resource
     }
 
     public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListLaporanJalans::route('/'),
-            // 'create' => Pages\CreateLaporanJalan::route('/create'),
-            'edit' => Pages\EditLaporanJalan::route('/{record}/edit'),
-        ];
-    }
+{
+    return [
+        'index' => Pages\ListLaporanJalans::route('/'),
+        'create' => Pages\CreateLaporanJalan::route('/create'),
+        'edit' => Pages\EditLaporanJalan::route('/{record}/edit'),
+        'view' => Pages\ViewLaporanJalan::route('/{record}/view'),
+    ];
+}
 }

@@ -15,7 +15,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize the map
-            var map = L.map('map').setView([51.505, -0.09], 13);
+            var map = L.map('map').setView([-7.371628450097823, 108.52700299463467], 15);
 
             // Add OpenStreetMap tiles
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -23,7 +23,7 @@
             }).addTo(map);
 
             // Add a marker
-            L.marker([51.505, -0.09]).addTo(map)
+            L.marker([-7.371628450097823, 108.52700299463467]).addTo(map)
                 .bindPopup('A pretty popup.<br> Easily customizable.')
                 .openPopup();
         });
