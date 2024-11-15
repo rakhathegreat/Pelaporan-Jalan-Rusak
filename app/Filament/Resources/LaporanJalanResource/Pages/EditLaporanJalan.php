@@ -22,36 +22,45 @@ class EditLaporanJalan extends EditRecord
         
         return $form->schema([
             TextInput::make('nama_jalan')
-            ->label("Nama Jalan"),
+            ->label("Nama Jalan")
+            ->required(),
 
             TextInput::make('kota')
-            ->label("Kota"),
+            ->label("Kota")
+            ->required(),
 
             TextInput::make('kelurahan')
-            ->label("Kelurahan"),
+            ->label("Kelurahan")
+            ->required(),
 
             TextInput::make('lingkungan')
-            ->label("Lingkungan"),
+            ->label("Lingkungan")
+            ->required(),
 
             TextInput::make('rt')
-            ->label("Rt"),
+            ->label("Rt")
+            ->required(),
 
             TextInput::make('rw')
             ->label("Rw"),
 
             TextInput::make('koordinat')
             ->label("Koordinat")
-            ->columnSpanFull(),
+            ->columnSpanFull()
+            ->required(),
 
             TextInput::make('lebar_jalan')
-            ->label("Lebar Jalan"),
+            ->label("Lebar Jalan")
+            ->required(),
 
             TextInput::make("panjang_jalan")
-            ->label("panjang_jalan"),
+            ->label("panjang_jalan")
+            ->required(),
 
             TextInput::make('kondisi')
             ->label('Kondisi')
-            ->columnSpanFull(),
+            ->columnSpanFull()
+            ->required(),
 
         ]);
     }

@@ -36,26 +36,46 @@ class LaporanJalanResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('Nama Jalan'),
+                TextInput::make('nama_jalan')
+                ->label("Nama Jalan")
+                ->required(),
 
-                TextInput::make('Kota'),
+                TextInput::make('kota')
+                ->label("Kota")
+                ->required(),
 
-                TextInput::make('Kelurahan'),
+                TextInput::make('kelurahan')
+                ->label("Kelurahan")
+                ->required(),
 
-                TextInput::make('Lingkungan'),
+                TextInput::make('lingkungan')
+                ->label("Lingkungan")
+                ->required(),
 
-                TextInput::make('Rt'),
+                TextInput::make('rt')
+                ->label("Rt")
+                ->required(),
 
-                TextInput::make('Rw'),
+                TextInput::make('rw')
+                ->label("Rw")
+                ->required(),
 
-                TextInput::make('Koordinat')
+                TextInput::make('koordinat')
+                ->label("Koordinat")
+                ->required()
                 ->columnSpanFull(),
 
-                TextInput::make('Lebar Jalan'),
+                TextInput::make('lebar_jalan')
+                ->label("Lebar Jalan")
+                ->required(),
 
-                TextInput::make('Panjang Jalan'),
+                TextInput::make('panjang_jalan')
+                ->label("Panjang Jalan")
+                ->required(),
 
-                TextInput::make('Kondisi')
+                TextInput::make('kondisi')
+                ->label("Kondisi")
+                ->required()
                 ->columnSpanFull(),
             ]);
     }
