@@ -16,4 +16,8 @@ class ListDataJalans extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected static ?string $title = 'Data Jalan';
+
+
 }

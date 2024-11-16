@@ -19,6 +19,13 @@ class DataJalanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Data Jalan';
+
+    public static function getPluralLabel(): string
+    {
+        return 'Data Jalan'; // Mengubah label jamak, hilangkan "s"
+    }
+
     public static function form(Form $form): Form
     {
         return $form

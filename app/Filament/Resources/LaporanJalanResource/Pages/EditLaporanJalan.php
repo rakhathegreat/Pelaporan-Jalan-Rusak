@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 
 class EditLaporanJalan extends EditRecord
 {
@@ -21,14 +22,6 @@ class EditLaporanJalan extends EditRecord
     {
         
         return $form->schema([
-            TextInput::make('nama_jalan')
-            ->label("Nama Jalan")
-            ->required(),
-
-            TextInput::make('kota')
-            ->label("Kota")
-            ->required(),
-
             TextInput::make('kelurahan')
             ->label("Kelurahan")
             ->required(),
@@ -49,18 +42,27 @@ class EditLaporanJalan extends EditRecord
             ->columnSpanFull()
             ->required(),
 
+            TextInput::make('nama_jalan')
+            ->label("Nama Jalan")
+            ->required(),
+
             TextInput::make('lebar_jalan')
             ->label("Lebar Jalan")
             ->required(),
 
             TextInput::make("panjang_jalan")
-            ->label("panjang_jalan")
+            ->label("Panjang Palan")
             ->required(),
 
-            TextInput::make('kondisi')
+            Select::make('kondisi')
             ->label('Kondisi')
-            ->columnSpanFull()
-            ->required(),
+            ->options([
+                'bagus' => 'Bagus',
+                'Rusak Sedang' => 'Rusak Sedang',
+                'Rusak Berat' => 'Rusak Berat',
+            ])
+            ->extraAttributes(['class' => 'focus:ring-0 border-none'])
+            ->native(false),
 
         ]);
     }

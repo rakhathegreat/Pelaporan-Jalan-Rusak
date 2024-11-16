@@ -5,7 +5,7 @@
     crossorigin=""/>
 
     <!-- Map container -->
-    <div id="map" style="height: 500px;"></div>
+    <div id="map" style="height: 420px;"></div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

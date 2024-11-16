@@ -10,7 +10,6 @@ class LaporanJalan extends Model
 
     protected $fillable = [
         "nama_jalan",
-        "kota",
         "kelurahan", 
         "lingkungan",
         "rt",

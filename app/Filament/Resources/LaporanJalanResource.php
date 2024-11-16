@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Contracts\Support\Htmlable;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 
 class LaporanJalanResource extends Resource
 {
@@ -30,20 +31,13 @@ class LaporanJalanResource extends Resource
     //     return false;
     // }
 
+    protected static ?string $actionButton = 'Buat Laporan';
 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('nama_jalan')
-                ->label("Nama Jalan")
-                ->required(),
-
-                TextInput::make('kota')
-                ->label("Kota")
-                ->required(),
-
                 TextInput::make('kelurahan')
                 ->label("Kelurahan")
                 ->required(),
@@ -65,6 +59,10 @@ class LaporanJalanResource extends Resource
                 ->required()
                 ->columnSpanFull(),
 
+                TextInput::make('nama_jalan')
+                ->label("Nama Jalan")
+                ->required(),
+
                 TextInput::make('lebar_jalan')
                 ->label("Lebar Jalan")
                 ->required(),
@@ -73,10 +71,19 @@ class LaporanJalanResource extends Resource
                 ->label("Panjang Jalan")
                 ->required(),
 
-                TextInput::make('kondisi')
+                Select::make('kondisi')
                 ->label("Kondisi")
-                ->required()
-                ->columnSpanFull(),
+                ->options([
+                    'Bagus' => 'Bagus',
+                    'Rusak Sedang' => 'Rusak Sedang',
+                    'Rusak Berat' => 'Rusak Berat',
+                ]),
+
+                Forms\Components\FileUpload::make('image')
+                    ->label('Gambar')
+                    ->image() 
+                    ->directory('uploads/images')
+                    ->columnSpanFull(), 
             ]);
     }
 
@@ -85,6 +92,7 @@ class LaporanJalanResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
+                ->label("No Laporan")
                 ->searchable()
                 ->toggleable(),
                 TextColumn::make('tanggal')

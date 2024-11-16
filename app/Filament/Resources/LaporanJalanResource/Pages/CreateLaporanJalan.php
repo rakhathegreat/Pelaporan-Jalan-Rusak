@@ -10,5 +10,10 @@ class CreateLaporanJalan extends CreateRecord
 {
     protected static string $resource = LaporanJalanResource::class;
 
+    protected function getCreateButtonLabel(): string
+    {
+        return 'Tambah Post Baru'; // Sesuaikan nama tombol yang kamu inginkan
+    }
     
+    protected static ?string $title = 'Buat Laporan Jalan';
 }
