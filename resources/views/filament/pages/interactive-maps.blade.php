@@ -5,7 +5,7 @@
     crossorigin=""/>
 
     <!-- Map container -->
-    <div id="map" style="height: 420px;"></div>
+    <div id="map" style="height: 500px;"></div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -14,18 +14,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Initialize the map
+            // Inisialisasi peta
             var map = L.map('map').setView([-7.371628450097823, 108.52700299463467], 15);
 
-            // Add OpenStreetMap tiles
+            // Tambahkan tile OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            // Add a marker
-            L.marker([-7.371628450097823, 108.52700299463467]).addTo(map)
-                .bindPopup('A pretty popup.<br> Easily customizable.')
-                .openPopup();
+            // Data dari server (Laravel ke JS)
+            var locations = @json($locations);
+
+            // Tambahkan marker berdasarkan data dari database
+            locations.forEach(function(location) {
+                var coords = location.koordinat.split(',');
+                var latitude = parseFloat(coords[0]);
+                var longitude = parseFloat(coords[1]);
+
+                // Tambahkan marker
+                L.marker([latitude, longitude], {
+                    icon: L.icon({
+                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/564/564619.png',
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 30],
+                        popupAnchor: [0, -30]
+                    })
+                }).addTo(map).bindPopup(
+                    `<b>${location.nama_jalan}</b><br>
+                    Kota: ${location.kota}<br>
+                    Lingkungan: ${location.lingkungan}<br>
+                    Kondisi: ${location.kondisi}`
+                );
+            });
         });
     </script>
 </x-filament-panels::page>
