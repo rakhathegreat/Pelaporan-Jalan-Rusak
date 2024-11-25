@@ -105,9 +105,16 @@ class LaporanJalanResource extends Resource
                 ->sortable()
                 ->searchable()
                 ->toggleable(),
-                // TextColumn::make('koordinat')
-                // ->searchable()
-                // ->toggleable(),
+                TextColumn::make('koordinat')
+                ->label('Koordinat')
+                ->getStateUsing(function ($record) {
+                    if ($record->koordinat) {
+                        return $record->koordinat->latitude . ', ' . $record->koordinat->longitude;
+                    }
+                    return 'No Coordinates';
+                })
+                ->searchable()
+                ->toggleable(),
                 TextColumn::make('kondisi')
                 ->searchable()
                 ->toggleable(),

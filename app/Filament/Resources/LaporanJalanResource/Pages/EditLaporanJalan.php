@@ -37,10 +37,17 @@ class EditLaporanJalan extends EditRecord
             TextInput::make('rw')
             ->label("Rw"),
 
-            TextInput::make('koordinat')
-            ->label("Koordinat")
-            ->columnSpanFull()
-            ->required(),
+            TextInput::make('Koordinat')
+            ->placeholder(function() {
+                // Cek apakah ada data koordinat terkait
+                if ($this->record->koordinat) {
+                    // Ambil data koordinat yang terkait dengan LaporanJalan
+                    return $this->record->koordinat->latitude . ', ' . $this->record->koordinat->longitude;
+                }
+                return '';
+            })
+            ->disabled()
+            ->columnSpanFull(),
 
             TextInput::make('nama_jalan')
             ->label("Nama Jalan")
