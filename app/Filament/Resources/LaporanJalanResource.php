@@ -105,14 +105,23 @@ class LaporanJalanResource extends Resource
                 ->sortable()
                 ->searchable()
                 ->toggleable(),
-                TextColumn::make('koordinat')
-                ->label('Koordinat')
-                ->getStateUsing(function ($record) {
-                    if ($record->koordinat) {
-                        return $record->koordinat->latitude . ', ' . $record->koordinat->longitude;
-                    }
-                    return 'No Coordinates';
-                })
+                // TextColumn::make('koordinat')
+                // ->label('Koordinat')
+                // ->getStateUsing(function ($record) {
+                //     if ($record->koordinat) {
+                //         return $record->koordinat->latitude . ', ' . $record->koordinat->longitude;
+                //     }
+                //     return 'No Coordinates';
+                // })
+                // ->searchable()
+                // ->toggleable(),
+                TextColumn::make('rt')
+                ->searchable()
+                ->toggleable(),
+                TextColumn::make('rw')
+                ->searchable()
+                ->toggleable(),
+                TextColumn::make('lingkungan')
                 ->searchable()
                 ->toggleable(),
                 TextColumn::make('kondisi')
