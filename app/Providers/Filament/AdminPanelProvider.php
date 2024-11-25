@@ -55,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->sidebarWidth('15rem')
-            ->databaseNotifications();
+            ->databaseNotifications()
+            ->brandName('Sistem Pelaporan Jalan Rusak');
     }
 }

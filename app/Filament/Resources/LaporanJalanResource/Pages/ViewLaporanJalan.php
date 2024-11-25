@@ -49,14 +49,9 @@ class ViewLaporanJalan extends ViewRecord
             ->placeholder($this->record->rw),
 
             TextInput::make('Koordinat')
-            ->placeholder(function() {
-                // Cek apakah ada data koordinat terkait
-                if ($this->record->koordinat) {
-                    // Ambil data koordinat yang terkait dengan LaporanJalan
-                    return $this->record->koordinat->latitude . ', ' . $this->record->koordinat->longitude;
-                }
-                return '';
-            })
+            ->placeholder(fn () => $this->record->koordinat
+            ? $this->record->koordinat->latitude . ', ' . $this->record->koordinat->longitude
+            : 'Tidak Ada')
             ->columnSpanFull(),
 
             TextInput::make('Lebar Jalan')
@@ -75,14 +70,18 @@ class ViewLaporanJalan extends ViewRecord
                 ->action(function() {
                     return redirect(LaporanJalanResource::getUrl('edit', ['record' => $this->record->getKey()]));
                 }),
-                Forms\Components\Actions\Action::make('Cancel')
+                Forms\Components\Actions\Action::make('Kembali')
                 ->action(function() {
                     return redirect(LaporanJalanResource::getUrl('index'));
                 })
                 ->color('gray')
                 ->outlined(),
                 Forms\Components\Actions\Action::make('Hapus')
-                ->action(fn (LaporanJalan $record) => $record->delete())
+                ->action(function (LaporanJalan $record) {
+                    $record->delete();
+                    // Redirect ke rute dashboard
+                    return redirect()->route('filament.admin.resources.laporan-jalans.index');
+                })
                 ->color('danger')
                 ->requiresConfirmation(),
             ])

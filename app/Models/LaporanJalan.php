@@ -33,6 +33,7 @@ class LaporanJalan extends Model
         return $this->hasOne(Koordinat::class, 'id');
     }
 
+
     public static function booted()
     {
         static::created(function ($model) {
@@ -48,7 +49,7 @@ class LaporanJalan extends Model
                 if ($gpsData) {
                     // Simpan ke tabel koordinat
                     $koordinat = Koordinat::create([
-                        'laporan_jalan_id' => $model->id,
+                        'id' => $model->id,
                         'latitude' => $gpsData[0][0],
                         'longitude' => $gpsData[0][1],
                     ]);
