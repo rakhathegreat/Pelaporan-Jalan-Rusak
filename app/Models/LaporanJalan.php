@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+
 
 class LaporanJalan extends Model
 {
@@ -17,6 +20,42 @@ class LaporanJalan extends Model
         "koordinat",
         "panjang_jalan",
         "lebar_jalan",
-        "kondisi"
+        "kondisi",
+        "image",
+        "id_koordinat"
     ];
+
+    public function koordinat()
+    {
+        return $this->hasOne(Koordinat::class, 'id');
+    }
+
+    public static function booted()
+    {
+        static::created(function ($model) {
+            if ($model->image) {
+                $imagePath = $model->image;
+                
+                $response = Http::post('http://127.0.0.1:8001/extract-gps/', [
+                    'path' => $imagePath,
+                ]);
+
+                $gpsData = $response->json();
+                
+                if ($gpsData) {
+                    // Simpan ke tabel koordinat
+                    $koordinat = Koordinat::create([
+                        'laporan_jalan_id' => $model->id,
+                        'latitude' => $gpsData[0][0],
+                        'longitude' => $gpsData[0][1],
+                    ]);
+
+                    // Update LaporanJalan dengan id_koordinat
+                    $model->update([
+                        'id_koordinat' => $koordinat->id,
+                    ]);
+                }
+            }
+        });
+    }
 }

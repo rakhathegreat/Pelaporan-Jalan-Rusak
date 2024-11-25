@@ -49,7 +49,14 @@ class ViewLaporanJalan extends ViewRecord
             ->placeholder($this->record->rw),
 
             TextInput::make('Koordinat')
-            ->placeholder($this->record->koordinat)
+            ->placeholder(function() {
+                // Cek apakah ada data koordinat terkait
+                if ($this->record->koordinat) {
+                    // Ambil data koordinat yang terkait dengan LaporanJalan
+                    return $this->record->koordinat->latitude . ', ' . $this->record->koordinat->longitude;
+                }
+                return '';
+            })
             ->columnSpanFull(),
 
             TextInput::make('Lebar Jalan')

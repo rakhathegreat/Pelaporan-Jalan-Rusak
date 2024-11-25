@@ -54,10 +54,10 @@ class LaporanJalanResource extends Resource
                 ->label("Rw")
                 ->required(),
 
-                TextInput::make('koordinat')
-                ->label("Koordinat")
-                ->required()
-                ->columnSpanFull(),
+                // TextInput::make('koordinat')
+                // ->label("Koordinat")
+                // ->required()
+                // ->columnSpanFull(),
 
                 TextInput::make('nama_jalan')
                 ->label("Nama Jalan")
@@ -80,11 +80,12 @@ class LaporanJalanResource extends Resource
                 ]),
 
                 Forms\Components\FileUpload::make('image')
-                    ->label('Gambar')
-                    ->image() 
-                    ->directory('uploads/images')
-                    ->columnSpanFull(), 
+                ->label('Gambar')
+                ->image()
+                ->directory('uploads/images')
+                ->columnSpanFull(),
             ]);
+            
     }
 
     public static function table(Table $table): Table
@@ -104,9 +105,9 @@ class LaporanJalanResource extends Resource
                 ->sortable()
                 ->searchable()
                 ->toggleable(),
-                TextColumn::make('koordinat')
-                ->searchable()
-                ->toggleable(),
+                // TextColumn::make('koordinat')
+                // ->searchable()
+                // ->toggleable(),
                 TextColumn::make('kondisi')
                 ->searchable()
                 ->toggleable(),
