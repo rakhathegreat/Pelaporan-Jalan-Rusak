@@ -16,7 +16,8 @@ class ListLaporanJalans extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-            ->label("Buat Laporan"),
+            ->label("Buat Laporan")
+            ,
         ];
     }
 }

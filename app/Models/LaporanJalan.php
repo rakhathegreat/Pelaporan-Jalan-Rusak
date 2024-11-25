@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Filament\Notifications\Notification;
+use Filament\Notifications\Actions\Action;
 
 
 class LaporanJalan extends Model
@@ -54,8 +57,16 @@ class LaporanJalan extends Model
                     $model->update([
                         'id_koordinat' => $koordinat->id,
                     ]);
+
+                    $recipient = auth()->user();
+ 
+                    Notification::make()
+                        ->title('Saved successfully')
+                        ->sendToDatabase($recipient);
                 }
             }
         });
     }
+
+    
 }

@@ -34,7 +34,7 @@ class ViewLaporanJalan extends ViewRecord
             ->placeholder($this->record->nama_jalan),
 
             TextInput::make('Kota')
-            ->placeholder($this->record->kota),
+            ->placeholder('Banjar'),
 
             TextInput::make('Kelurahan')
             ->placeholder($this->record->kelurahan),
