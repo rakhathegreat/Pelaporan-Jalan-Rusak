@@ -8,3 +8,9 @@ Route::get('/', function () {
 });
 
 Route::redirect('/', '/admin/login');
+
+use App\Filament\Resources\LaporanJalanResource;
+
+Route::get('/laporan/create', [LaporanJalanResource::class, 'create'])->name('laporan.create');
+
+Route::get('/laporan', \App\Filament\Pages\LaporanTamuPage::class)->name('laporan.tamu');
