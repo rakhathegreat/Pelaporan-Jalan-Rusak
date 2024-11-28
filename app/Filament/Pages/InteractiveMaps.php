@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Contracts\View\View;
+use App\Models\LaporanJalan;
 
 class InteractiveMaps extends Page
 {
@@ -18,4 +19,13 @@ class InteractiveMaps extends Page
     {
         return null; // This removes the <h1> header
     }
+
+    public $locations;
+
+    public function mount()
+    {
+        $this->locations = LaporanJalan::with('koordinat')->get();
+    }
+
+
 }
