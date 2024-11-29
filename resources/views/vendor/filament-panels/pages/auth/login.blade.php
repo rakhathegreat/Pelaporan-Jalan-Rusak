@@ -18,7 +18,7 @@
         />
     </x-filament-panels::form>
 
-    <x-filament::button outlined icon="heroicon-c-document-text">
+    <x-filament::button outlined icon="heroicon-c-document-text" onclick="location.href='{{ route('laporan.tamu') }}'">
     Laporan
     </x-filament::button>
 
