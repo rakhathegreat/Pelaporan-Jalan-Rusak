@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Contracts\Support\Htmlable;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use App\Filament\Exports\LaporanJalanExporter;
+use Filament\Tables\Actions\ExportAction;
 
 class LaporanJalanResource extends Resource
 {
@@ -120,6 +122,10 @@ class LaporanJalanResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(LaporanJalanExporter::class)
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

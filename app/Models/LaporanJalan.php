@@ -35,39 +35,46 @@ class LaporanJalan extends Model
 
 
     public static function booted()
-    {
-        static::created(function ($model) {
-            if ($model->image) {
-                $imagePath = $model->image;
-                
-                $response = Http::post('http://127.0.0.1:8001/extract-gps/', [
-                    'path' => $imagePath,
+{
+    static::created(function ($model) {
+        if ($model->image) {
+            $imagePath = $model->image;
+            $fullImagePath = "/home/dadang/Documents/Pelaporan-Jalan-Rusak/storage/app/public/" . $imagePath;
+
+            // Send POST request to FastAPI
+            $response = Http::post('http://127.0.0.1:8001/extract-gps/', [
+                'path' => $fullImagePath,
+            ]);
+
+            // Check for the response
+            if ($response->successful()) {
+                $gpsData = $response->json();
+
+                // Save GPS coordinates to the Koordinat table
+                $koordinat = Koordinat::create([
+                    'id' => $model->id,
+                    'latitude' => $gpsData['latitude'], 
+                    'longitude' => $gpsData['longitude'],
                 ]);
 
-                $gpsData = $response->json();
-                
-                if ($gpsData) {
-                    // Simpan ke tabel koordinat
-                    $koordinat = Koordinat::create([
-                        'id' => $model->id,
-                        'latitude' => $gpsData[0][0],
-                        'longitude' => $gpsData[0][1],
-                    ]);
+                // Update LaporanJalan with the coordinate id
+                $model->update([
+                    'id_koordinat' => $koordinat->id,
+                ]);
 
-                    // Update LaporanJalan dengan id_koordinat
-                    $model->update([
-                        'id_koordinat' => $koordinat->id,
-                    ]);
-
-                    $recipient = auth()->user();
- 
-                    Notification::make()
-                        ->title('Saved successfully')
-                        ->sendToDatabase($recipient);
-                }
+                // Notify the user
+                $recipient = auth()->user();
+                Notification::make()
+                    ->title('Saved successfully')
+                    ->sendToDatabase($recipient);
+            } else {
+                // Handle error if the FastAPI response fails
+                // You can log the error or send a notification
+                Log::error('Failed to extract GPS data', ['response' => $response->body()]);
             }
-        });
-    }
+        }
+    });
+}
 
     
 }
