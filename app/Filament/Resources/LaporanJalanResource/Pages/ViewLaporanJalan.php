@@ -65,7 +65,7 @@ class ViewLaporanJalan extends ViewRecord
             ->columnSpanFull(),
 
             Forms\Components\Actions::make([
-                Forms\Components\Actions\Action::make('Export'),
+                Forms\Components\Actions\Action::make('Lihat di map'),
                 Forms\Components\Actions\Action::make('Edit')
                 ->action(function() {
                     return redirect(LaporanJalanResource::getUrl('edit', ['record' => $this->record->getKey()]));

@@ -6,6 +6,10 @@ use App\Models\LaporanJalan;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
+use OpenSpout\Common\Entity\Style\CellAlignment;
+use OpenSpout\Common\Entity\Style\CellVerticalAlignment;
+use OpenSpout\Common\Entity\Style\Color;
+use OpenSpout\Common\Entity\Style\Style;    
 
 class LaporanJalanExporter extends Exporter
 {
@@ -23,6 +27,19 @@ class LaporanJalanExporter extends Exporter
             ExportColumn::make('lebar_jalan'),
             ExportColumn::make('kondisi'),
         ];
+    }
+ 
+    public function getXlsxHeaderCellStyle(): ?Style
+    {
+        return (new Style())
+            ->setFontBold()
+            ->setFontItalic()
+            ->setFontSize(14)
+            ->setFontName('Consolas')
+            ->setFontColor(Color::rgb(255, 255, 77))
+            ->setBackgroundColor(Color::rgb(0, 0, 0))
+            ->setCellAlignment(CellAlignment::CENTER)
+            ->setCellVerticalAlignment(CellVerticalAlignment::CENTER);
     }
 
     public static function getCompletedNotificationBody(Export $export): string
