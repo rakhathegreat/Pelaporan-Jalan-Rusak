@@ -24,6 +24,9 @@ return new class extends Migration
             $table->integer('panjang_jalan');
             $table->integer('lebar_jalan');
             $table->string('kondisi');
+            $table->string('image')->nullable();
+            $table->timestamps();
+
         });
     }
 
