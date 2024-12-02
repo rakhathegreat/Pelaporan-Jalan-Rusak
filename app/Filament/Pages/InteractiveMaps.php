@@ -13,6 +13,7 @@ class InteractiveMaps extends Page
     protected static string $view = 'filament.pages.interactive-maps';
 
     protected static ?string $title = 'Peta Sebaran Jalan Rusak';
+    protected static ?string $slug = 'interactive-maps';
     protected static ?string $navigationLabel = 'Maps';
 
     public function getHeader(): ?view
@@ -26,6 +27,6 @@ class InteractiveMaps extends Page
     {
         $this->locations = LaporanJalan::with('koordinat')->get();
     }
-
+    
 
 }

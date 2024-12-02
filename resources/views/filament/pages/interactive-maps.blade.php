@@ -11,7 +11,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Inisialisasi peta
-            var map = L.map('map').setView([-7.371628450097823, 108.52700299463467], 15);
+            var map = L.map('map').setView([-7.371628450097823, 108.52700299463467], 17);
 
             // Simpan posisi awal peta
             var homeLatLng = [-7.371628450097823, 108.52700299463467];

@@ -126,6 +126,7 @@ class LaporanJalanResource extends Resource
             ->headerActions([
                 ExportAction::make()
                     ->exporter(LaporanJalanExporter::class)
+                    ->label('Export')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -134,6 +135,9 @@ class LaporanJalanResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ExportBulkAction::make()
+                        ->exporter(LaporanJalanExporter::class)
+                        ->label('Export')
                 ]),
             ]);
     }
