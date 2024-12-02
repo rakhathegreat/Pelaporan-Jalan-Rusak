@@ -11,11 +11,8 @@ Route::get('/', function () {
 
 Route::redirect('/', '/admin/login');
 
-use App\Filament\Resources\LaporanJalanResource;
+use App\Http\Controllers\LaporanTamuController;
 
-Route::get('/laporan/create', [LaporanJalanResource::class, 'create'])->name('laporan.create');
-
-Route::get('/laporan', \App\Filament\Pages\LaporanTamuPage::class)->name('laporan.tamu');
-
-Route::get('/interactive-maps', InteractiveMaps::class)->name('interactive-maps');
+Route::view('/laporan-tamu', 'laporan_tamu')->name('laporan.tamu'); // Menampilkan form
+Route::post('/laporan-tamu', [LaporanTamuController::class, 'store'])->name('laporan.tamu.store'); // Menangani penyimpanan
 
